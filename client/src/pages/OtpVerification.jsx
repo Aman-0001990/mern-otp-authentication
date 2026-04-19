@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "../styles/OtpVerification.css";
-import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../main";
 import { useState } from "react";
+import { api } from "../utils/api.js";
 
 const OtpVerification = () => {
   const { isAuthenticated,
@@ -35,7 +35,7 @@ const OtpVerification = () => {
     const data = {
       email, otp: enteredOtp, phone
     };
-    await axios.post("https://mern-otp-authentication.onrender.com/api/v1/user/otp-verification", { email, otp: enteredOtp, phone }, {
+    await axios.post(api.verifyOtp, { email, otp: enteredOtp, phone }, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

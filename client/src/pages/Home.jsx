@@ -6,6 +6,7 @@ import "../styles/Home.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Context } from "../main";
+import { api } from "../utils/api.js";
 import { Navigate, useNavigate } from "react-router-dom";
 import Footer from "../layout/Footer";
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context);
  
   const logout = async () => {
-    await axios.get("https://mern-otp-authentication.onrender.com/api/v1/user/logout", {
+    await axios.get(api.logout, {
       withCredentials: true
     }).then((res) => {
       toast.success(res.data.message);

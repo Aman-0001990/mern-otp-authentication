@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../main";
 import { data, useNavigate } from "react-router-dom";
+import { api } from "../utils/api.js";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -11,7 +12,7 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const handleRegister = async (data) => {
     data.phone = `+91${data.phone}`
-    await axios.post("https://mern-otp-authentication.onrender.com/api/v1/user/register", data, {
+    await axios.post(api.register, data, {
       withCredentials: true,
       headers: { "Content-Type": "application/json" },
     }).then((res) => {

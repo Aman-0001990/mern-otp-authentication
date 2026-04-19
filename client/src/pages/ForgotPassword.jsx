@@ -3,13 +3,14 @@ import "../styles/ForgotPassword.css";
 import { Context } from "../main";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { api } from "../utils/api.js";
 
 const ForgotPassword = () => {
   const { isAuthenticated } = useContext(Context);
   const [email, setEmail] = useState("");
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    await axios.post("https://mern-otp-authentication.onrender.com/api/v1/user/password/forget", { email }, {
+    await axios.post(api.forgotPassword, { email }, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

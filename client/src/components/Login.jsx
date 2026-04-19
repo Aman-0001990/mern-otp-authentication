@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
 import { data, Link, useNavigate } from "react-router-dom";
+import { api } from "../utils/api.js";
 
 const Login = () => {
   const {
@@ -12,7 +13,7 @@ const Login = () => {
   const navigateTo = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const handleLogin = async (data) => {
-    await axios.post("https://mern-otp-authentication.onrender.com/api/v1/user/login", data, {
+    await axios.post(api.login, data, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

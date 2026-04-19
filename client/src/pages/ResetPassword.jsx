@@ -4,6 +4,7 @@ import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../main";
+import { api } from "../utils/api.js";
 const ResetPassword = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context);
   const { token } = useParams();
@@ -13,7 +14,7 @@ const ResetPassword = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     const handleLogin = async (data) => {
-      await axios.put(`https://mern-otp-authentication.onrender.com/api/v1/user/password/reset/${token}`, { password, confirmPassword }, {
+      await axios.put(api.resetPassword(token), { password, confirmPassword }, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

@@ -10,13 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { Context } from "./main";
 import OtpVerification from "./pages/OtpVerification";
+import { api } from "./utils/api.js";
 
 const App = () => {
   const { setIsAuthenticated, setUser } = useContext(Context);
 
   useEffect(() => {
     const getUser = async () => {
-      await axios.get("https://mern-otp-authentication.onrender.com/api/v1/user/me", { withCredentials: true }).then(res => {
+      await axios.get(api.getUser, { withCredentials: true }).then(res => {
         setUser(res.data.user);
         setIsAuthenticated(true);
       }).catch(err => {
