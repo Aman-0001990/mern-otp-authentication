@@ -7,7 +7,7 @@ import { errorMiddleware } from "./middlewares/error.js";
 import userRouter  from "./routes/userRouter.js";
 import { removeUnverifiedAccounts } from "./automation/removeUnverifiedAccounts.js";
 config({
-    path: "./config.env",
+    path: ".env",
     override: true,
 });
 
@@ -15,7 +15,7 @@ config({
 export const app = express();
 app.use(cors(
     {
-        origin: [process.env.FRONTEND_URL, "http://localhost:5173", "https://localhost:5173"],
+        origin: [process.env.FRONTEND_URL, "http://localhost:5173", "https://localhost:5173", "https://portfolio-aman-1.netlify.app"],
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
         credentials: true,
     }
