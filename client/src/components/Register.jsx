@@ -11,15 +11,25 @@ const Register = () => {
   const navigateTo = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const handleRegister = async (data) => {
-    data.phone = `+91${data.phone}`
+    if (!data.phone.startsWith("+")) {
+      data.phone = `+91${data.phone}`;
+    }
     await axios.post(api.register, data, {
       withCredentials: true,
       headers: { "Content-Type": "application/json" },
     }).then((res) => {
+      console.log('Register success response:', res.data);
       toast.success(res.data.message);
-      navigateTo(`/otp-verification/${data.email}/${data.phone}`);
+      try {
+        navigateTo(`/otp-verification/${data.email}/${data.phone}`);
+        console.log('Navigated to otp-verification', data.email, data.phone);
+      } catch (navErr) {
+        console.error('Navigation error:', navErr);
+      }
     }).catch((error) => {
-      toast.error(error.response.data.message);
+      console.error('Register error response:', error.response?.data || error.message);
+      const msg = error.response?.data?.message || error.message || 'Registration failed.';
+      toast.error(msg);
     })
   };
   return <>
